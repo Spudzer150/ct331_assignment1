@@ -59,3 +59,57 @@ void deleteAfter(listElement* after){
   free(delete->data);
   free(delete);
 }
+
+int length(listElement* list){
+	listElement* tracker = list;
+	int counter =0;
+	while(tracker != NULL){
+		counter++;
+		tracker = tracker->next;
+	}
+	return counter;
+}
+
+void push(listElement** list, char* data, size_t size){
+	listElement* new = createEl(data, size);
+	new->next = *list;
+	*list = new;
+}
+
+listElement* pop(listElement** list){
+	
+	listElement* head = *list;
+
+	if(head){
+		*list = head->next;
+		head->next=NULL;
+	}
+	return head;
+}
+
+void enqueue(listElement** list, char* data, size_t size){
+	listElement* new = createEl(data, size);
+	new->next=*list;
+	*list=new;
+}
+
+listElement* dequeue(listElement* list){
+
+listElement *tail =NULL;  //will be set to second last node
+listElement *cursor = list;  //will be set to the last node
+
+
+while(cursor->next != NULL){  //Move the whole way through the list to find the tail. 
+	tail = cursor;
+	cursor = cursor->next;
+}
+	if(tail != NULL)
+		tail->next =NULL; //detatch from list
+
+	if(cursor == list)  //check if this is the last elelment in the list
+	list = NULL;
+
+	free(cursor);
+
+	return list;
+}

@@ -3,4 +3,10 @@
 
 void runTests();
 
+void printInt(void* data);
+
+void printChar(void* data);
+
+void printString(void* data);
+
 #endif
